@@ -1,5 +1,14 @@
 # Jae's ~/.bash_profile
 
+# bash completion for mac through homebrew
+case "$OSTYPE" in
+    *darwin*)
+        if [ -f $(brew --prefix)/etc/bash_completion ]; then
+            . $(brew --prefix)/etc/bash_completion
+        fi
+        ;;
+esac
+
 # include .bashrc if it exists
 if [ -f "$HOME/.bashrc" ]; then
 	. "$HOME/.bashrc"
