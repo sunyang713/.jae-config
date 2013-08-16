@@ -1,0 +1,27 @@
+# Jae's ~/.bashrc
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history
+# and don't put lines starting with space.
+HISTCONTROL=ignoredups:ignorespace
+
+# prompt
+PS1='\u@\h:\w\$ '
+
+# aliases
+case "$OSTYPE" in
+*linux*)
+	alias ls='ls --color=auto'
+	;;
+*darwin*)
+	alias ls='ls -G'
+	;;
+esac
+alias ll='ls -alF'
+alias l='ls -CF'
+
+# editor
+export EDITOR=vim
+
