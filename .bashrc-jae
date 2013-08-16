@@ -25,3 +25,6 @@ alias l='ls -CF'
 # editor
 export EDITOR=vim
 
+# set vi editing mode
+set -o vi
+
