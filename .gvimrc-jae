@@ -37,6 +37,7 @@ if has("gui_gtk")
 " MacVim settings:
 elseif has("gui_macvim")
 
+    " Menlo Regular is MacVim's default font - setting it to choose size 15
     set guifont=Menlo\ Regular:h15
 
     " Color scheme
