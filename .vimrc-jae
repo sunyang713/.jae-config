@@ -133,3 +133,8 @@ set backupdir^=~/.backup
 " full path into swap file names.
 set dir^=~/.backup//
 
+" Ignore case when searching
+" - override this setting by tacking on \c or \C to your search term to make
+"   your search always case-insensitive or case-sensitive, respectively.
+set ignorecase
+
