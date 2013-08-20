@@ -33,7 +33,14 @@ else
 fi
 unset show_what_in_title_bar
 
-# aliases
+# editor
+export EDITOR=vim
+
+# set vi editing mode
+set -o vi
+
+# aliases & functions
+
 case "$OSTYPE" in
 *linux*)
         alias dmesg='dmesg --color'
@@ -47,10 +54,13 @@ esac
 alias ll='ls -alF'
 alias l='ls -CF'
 alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
 
-# editor
-export EDITOR=vim
+svndiff()     { svn diff "$@" | colordiff; }
+svndiffless() { svn diff "$@" | colordiff | less -R; }
 
-# set vi editing mode
-set -o vi
+alias gccg='gcc -g -Wall'
+alias g++g='g++ -g -Wall'
+alias valgrindlc='valgrind --leak-check=yes'
 
