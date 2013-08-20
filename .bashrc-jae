@@ -14,6 +14,25 @@ PS1='\u@\h \w \$ '
 # - see https://wiki.archlinux.org/index.php/Color_Bash_Prompt
 PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
 
+# show "[hh:mm] user@host:pwd" in xterm title bar
+if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
+    # for Mac Terminal, omit "User@Users-MacBook-Air"
+    # and preserve PROMPT_COMMAND set by /etc/bashrc.
+    show_what_in_title_bar='"[$(date +%H:%M)] ${PWD/#$HOME/~}"'
+    PROMPT_COMMAND='printf "\033]0;%s\007" '"$show_what_in_title_bar; $PROMPT_COMMAND"
+else
+    show_what_in_title_bar='"[$(date +%H:%M)] ${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"'
+    case ${TERM} in
+        xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
+            PROMPT_COMMAND='printf "\033]0;%s\007" '$show_what_in_title_bar
+            ;;
+        screen)
+            PROMPT_COMMAND='printf "\033_%s\033\\" '$show_what_in_title_bar
+            ;;
+    esac
+fi
+unset show_what_in_title_bar
+
 # aliases
 case "$OSTYPE" in
 *linux*)
